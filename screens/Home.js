@@ -1,17 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 
-
-
-const Home = () => {
+function Home() {
   return (
     <View>
-      <Header />
-      <SearchBar />
+      <SafeAreaView>
+        <Header />
+        <SearchBar />
+      </SafeAreaView>
     </View>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
