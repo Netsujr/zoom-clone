@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 
 const Header = () => {
@@ -11,3 +11,5 @@ const Header = () => {
 };
 
 export default Header;
+
+const styles = StyleSheet.create;

@@ -1,17 +1,30 @@
 import React from 'react';
-import { View, SafeAreaView, Text } from 'react-native';
+import { View, SafeAreaView, StyleSheet } from 'react-native';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
+import MenuButtons from '../components/MenuButtons';
+import ContactsMenu from '../components/ContactsMenu';
 
-function Home() {
+const Home = () => {
   return (
-    <View>
-      <SafeAreaView>
+    <View style={styles.container}>
+      {/* inline styling */}
+      <SafeAreaView style={{ height: '100%'}}>
         <Header />
         <SearchBar />
+        <MenuButtons />
+        <ContactsMenu />
       </SafeAreaView>
     </View>
   );
 }
 
 export default Home
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#1c1c1c",
+    padding: 15,
+
+  }
+});
