@@ -1,12 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity } from 'react-native';
 import StartMeeting from '../components/StartMeeting';
 import { io } from "socket.io-client";
 import { Camera } from "expo-camera";
 // import { TouchableOpacity } from 'react-native-web';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-
+const menuIcons = [
+  {
+    id: 1,
+    name: "microphone",
+    title: "Mute",
+    customColor: "rgba(0, 178, 202, 0.5)"
+  },
+  {
+    id: 2,
+    name: "video-camera",
+    title: "Stop Video",
+    // customColor: "rgba(0, 178, 202, 0.5)"
+  },
+  {
+    id: 3,
+    name: "upload",
+    title: "Share Content",
+    // customColor: "rgba(0, 178, 202, 0.5)"
+  },
+  {
+    id: 4,
+    name: "group",
+    title: "Participants",
+    // customColor: "rgba(0, 178, 202, 0.5)"
+  },
+];
 
 let socket;
 
@@ -48,16 +73,19 @@ function MeetingRoom() {
     <View style={styles.container}>
       {startCamera ? (
         <SafeAreaView>
-          <View style={styles.menu}>
-            <TouchableOpacity style={styles.tile}>
-              <FontAwesome name={"microphone"} size={24} color={"rgba(0, 178, 202, 0.5)"} />
-              <Text style={styles.textTile}>Mute</Text>
-            </TouchableOpacity>
-          </View>
           <Camera
             type={"front"}
-            style={{ width: "100%", height: 600 }}>
+            style={{ width: "100%", height: "75%" }}>
           </Camera>
+          <View style={styles.menu}>
+            {menuIcons.map((icon, index) =>
+
+              <TouchableOpacity style={styles.tile}>
+                <FontAwesome name={icon.name} size={24} color={"rgba(0, 178, 202, 0.5)"} />
+                <Text style={styles.textTile}>Mute</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </SafeAreaView>
       ) : (
         // {/* Start meeting button  */}
@@ -81,7 +109,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1c1c1c",
     flex: 1,
-    marginBottom: StatusBar.currentHeight
   },
   menu: {
 
