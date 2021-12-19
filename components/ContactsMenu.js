@@ -39,7 +39,7 @@ function ContactsMenu() {
             )
           }
           {/* Text */}
-          <Text style={styles.text}>Starred</Text>
+          <Text style={styles.text}>{contact.name}</Text>
         </View>
       )}
     </View>
@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   image: {
-
+    width: 55,
+    height: 55,
+    borderRadius: 20
   }
 })
