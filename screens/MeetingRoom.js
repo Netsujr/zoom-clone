@@ -38,7 +38,7 @@ let socket;
 function MeetingRoom() {
   const [name, setName] = useState();
   const [roomId, setRoomId] = useState();
-  const [activeUsers, setActiveUsers] = useState();
+  const [activeUsers, setActiveUsers] = useState(["Ricky", "Joss"]);
   const [startCamera, setStartCamera] = useState(false);
 
   const __startCamera = async () => {
@@ -76,13 +76,21 @@ function MeetingRoom() {
           <View style={styles.cameraContainer}>
             <Camera
               type={"front"}
-              style={{ width: "100%", height: "100%" }}>
+              style={{
+                width: activeUsers.lenght == 0 ? "100%" : 200,
+                height: activeUsers.lenght == 0 ? "100%" : 200
+              }}>
             </Camera>
+            {activeUsers.map((user, index) =>
+              <View key={index} style={styles.activeUserContainer}>
+                <Text style={{ color: "white" }}>{user.name}</Text>
+              </View>
+
+            )}
           </View>
           {/* // this is the "footer"  */}
           <View style={styles.menu}>
             {menuIcons.map((icon, index) =>
-
               <TouchableOpacity style={styles.tile}>
                 <FontAwesome name={icon.name} size={24} color={"rgba(0, 178, 202, 0.5)"} />
                 <Text style={styles.textTile}>{icon.title}</Text>
@@ -136,6 +144,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "black"
 
+  },
+
+  activeUserContainer: {
+    borderColor: "gray",
+    borderWidth: 1,
+    width: 200,
+    height: 200,
+    justifyContent: "center",
+    alignItems: "center"
   }
 
 });
