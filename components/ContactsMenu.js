@@ -4,7 +4,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
 const contactsMenuButtons = [
   {
-    type: "starred"
+    type: "starred",
+    name: "Starred"
   },
   {
     type: "contact",
@@ -43,8 +44,8 @@ function ContactsMenu() {
         </View>
       )}
     </View>
-  )
-}
+  );
+};
 
 export default ContactsMenu;
 
