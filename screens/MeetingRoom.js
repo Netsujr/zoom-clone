@@ -16,13 +16,13 @@ const menuIcons = [
   {
     id: 2,
     name: "video-camera",
-    title: "Stop Video",
+    title: "Video",
     // customColor: "rgba(0, 178, 202, 0.5)"
   },
   {
     id: 3,
     name: "upload",
-    title: "Share Content",
+    title: "Share",
     // customColor: "rgba(0, 178, 202, 0.5)"
   },
   {
@@ -72,17 +72,20 @@ function MeetingRoom() {
   return (
     <View style={styles.container}>
       {startCamera ? (
-        <SafeAreaView>
-          <Camera
-            type={"front"}
-            style={{ width: "100%", height: "75%" }}>
-          </Camera>
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={styles.cameraContainer}>
+            <Camera
+              type={"front"}
+              style={{ width: "100%", height: "100%" }}>
+            </Camera>
+          </View>
+          {/* // this is the "footer"  */}
           <View style={styles.menu}>
             {menuIcons.map((icon, index) =>
 
               <TouchableOpacity style={styles.tile}>
                 <FontAwesome name={icon.name} size={24} color={"rgba(0, 178, 202, 0.5)"} />
-                <Text style={styles.textTile}>Mute</Text>
+                <Text style={styles.textTile}>{icon.title}</Text>
               </TouchableOpacity>
             )}
           </View>
@@ -111,8 +114,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   menu: {
-
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 10
   },
+
   textTile: {
     color: 'white',
     marginTop: 10
@@ -123,6 +129,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 50,
     marginTop: 15
+  },
+
+  cameraContainer: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "black"
+
   }
 
 });
