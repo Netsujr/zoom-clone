@@ -7,21 +7,21 @@ const contactsMenuButtons = [
     type: "starred"
   },
   {
-    type: 'contact',
+    type: "contact",
     name: "Renato Delboni",
     photo: require("../assets/RenP.png")
   },
   {
-    type: 'contact',
+    type: "contact",
     name: "Tatiana",
     photo: require("../assets/kitty.jpeg")
   },
   {
-    type: 'contact',
+    type: "contact",
     name: "Lilian",
-    photo: require("../assets/doggy.JPG")
+    photo: require("../assets/doggy.png")
   }
-]
+];
 
 function ContactsMenu() {
   return (
@@ -39,13 +39,11 @@ function ContactsMenu() {
             )
           }
           {/* Text */}
-          <Text style={styles.text}>
-            Starred
-          </Text>
+          <Text style={styles.text}>Starred</Text>
         </View>
       )}
     </View>
-  );
+  )
 }
 
 export default ContactsMenu;
@@ -74,5 +72,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20
+  },
+  image: {
+
   }
 })
