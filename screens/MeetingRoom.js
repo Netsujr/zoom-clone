@@ -38,7 +38,7 @@ let socket;
 function MeetingRoom() {
   const [name, setName] = useState();
   const [roomId, setRoomId] = useState();
-  const [activeUsers, setActiveUsers] = useState(["Ricky", "Joss"]);
+  const [activeUsers, setActiveUsers] = useState(["Ricky", "Joss", "Banana"]);
   const [startCamera, setStartCamera] = useState(false);
 
   const __startCamera = async () => {
@@ -73,20 +73,23 @@ function MeetingRoom() {
     <View style={styles.container}>
       {startCamera ? (
         <SafeAreaView style={{ flex: 1 }}>
-          <View style={styles.cameraContainer}>
-            <Camera
-              type={"front"}
-              style={{
-                width: activeUsers.lenght == 0 ? "100%" : 200,
-                height: activeUsers.lenght == 0 ? "100%" : 200
-              }}>
-            </Camera>
-            {activeUsers.map((user, index) =>
-              <View key={index} style={styles.activeUserContainer}>
-                <Text style={{ color: "white" }}>{user.name}</Text>
-              </View>
+          <View style={styles.activeUsersContainer}>
+            <View style={styles.cameraContainer}>
+              <Camera
+                type={"front"}
+                style={{
+                  width: activeUsers.lenght == 0 ? "100%" : 150,
+                  height: activeUsers.lenght == 0 ? "100%" : 150
+                  // resizeMode: activeUsers.lenght == 0 ? null : "contain"
+                }}>
+              </Camera>
+              {activeUsers.map((user, index) =>
+                <View key={index} style={styles.activeUserContainer}>
+                  <Text style={{ color: "white" }}>{user.userName}</Text>
+                </View>
 
-            )}
+              )}
+            </View>
           </View>
           {/* // this is the "footer"  */}
           <View style={styles.menu}>
@@ -124,7 +127,7 @@ const styles = StyleSheet.create({
   menu: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginBottom: 10
+    marginBottom: 10,
   },
 
   textTile: {
@@ -140,19 +143,26 @@ const styles = StyleSheet.create({
   },
 
   cameraContainer: {
-    flex: 1,
     justifyContent: "center",
-    backgroundColor: "black"
-
+    backgroundColor: "black",
+    flexDirection: "row",
+    flexWrap: "wrap"
   },
 
   activeUserContainer: {
     borderColor: "gray",
     borderWidth: 1,
-    width: 200,
-    height: 200,
+    // flex: 1,
+    width: 150,
+    height: 150,
+    // resizeMode: "contain",
     justifyContent: "center",
     alignItems: "center"
+  },
+
+  activeUsersContainer: {
+    flex: 1,
+    justifyContent: "center"
   }
 
 });
