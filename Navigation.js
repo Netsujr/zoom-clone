@@ -30,6 +30,6 @@ function Navigation() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default Navigation;

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity } from 'react-native';
 import StartMeeting from '../components/StartMeeting';
 import { io } from "socket.io-client";
 import { Camera } from "expo-camera";
-import { TouchableOpacity } from 'react-native-web';
-import { FontAwesome } from "react-native-vector-icons/FontAwesome";
+// import { TouchableOpacity } from 'react-native-web';
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 let socket;
 
 function MeetingRoom() {
-
   const [name, setName] = useState();
   const [roomId, setRoomId] = useState();
   const [activeUsers, setActiveUsers] = useState();
@@ -24,7 +23,7 @@ function MeetingRoom() {
     } else {
       Alert.alert("Access Denied");
     }
-  };
+  }
 
   const joinRoom = () => {
     __startCamera();
@@ -41,7 +40,7 @@ function MeetingRoom() {
       setActiveUsers(users);
     });
     // console.log("hello again")
-  }, []);
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -52,9 +51,7 @@ function MeetingRoom() {
             style={{ width: "100%", height: 600 }}>
           </Camera>
           <View style={styles.menu}>
-            <TouchableOpacity
-              style={styles.tile}
-            >
+            <TouchableOpacity style={styles.tile}>
               <FontAwesome name={"microphone"} size={24} color={"rgba(0, 178, 202, 0.5)"} />
               <Text style={styles.textTile}>Mute</Text>
             </TouchableOpacity>
@@ -73,10 +70,9 @@ function MeetingRoom() {
       )
       }
     </View>
-  );
-};
+  )
+}
 
-{/* <Text>Meeting Room</Text> */ }
 export default MeetingRoom;
 
 const styles = StyleSheet.create({
@@ -88,6 +84,14 @@ const styles = StyleSheet.create({
 
   },
   textTile: {
+    color: 'white',
+    marginTop: 10
+  },
 
+  tile: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    marginTop: 15
   }
 });
