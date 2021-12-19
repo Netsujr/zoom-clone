@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
 import StartMeeting from '../components/StartMeeting';
 import { io } from "socket.io-client";
 import { Camera } from "expo-camera";
 // import { TouchableOpacity } from 'react-native-web';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+
+
 
 let socket;
 
@@ -32,7 +34,7 @@ function MeetingRoom() {
 
   useEffect(() => {
     // make sure to change the url during deployment
-    socket = io("http://22bc-175-177-41-148.ngrok.io");
+    socket = io("http://fe01-2407-c800-1303-0-6856-6b0-d76-7e9b.ngrok.io");
     socket.on('connection', () => console.log("connected"));
     socket.on("all-users", users => {
       console.log("Active Users");
@@ -46,16 +48,16 @@ function MeetingRoom() {
     <View style={styles.container}>
       {startCamera ? (
         <SafeAreaView>
-          <Camera
-            type={"front"}
-            style={{ width: "100%", height: 600 }}>
-          </Camera>
           <View style={styles.menu}>
             <TouchableOpacity style={styles.tile}>
               <FontAwesome name={"microphone"} size={24} color={"rgba(0, 178, 202, 0.5)"} />
               <Text style={styles.textTile}>Mute</Text>
             </TouchableOpacity>
           </View>
+          <Camera
+            type={"front"}
+            style={{ width: "100%", height: 600 }}>
+          </Camera>
         </SafeAreaView>
       ) : (
         // {/* Start meeting button  */}
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1c1c1c",
     flex: 1,
+    marginBottom: StatusBar.currentHeight
   },
   menu: {
 
@@ -94,4 +97,5 @@ const styles = StyleSheet.create({
     height: 50,
     marginTop: 15
   }
+
 });
