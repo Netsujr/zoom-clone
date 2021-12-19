@@ -9,6 +9,7 @@ function MeeetingRoom() {
 
   const [name, setName] = useState();
   const [roomId, setRoomId] = useState();
+  const [activeUsers, setActiveUsers] = useState();
 
   const joinRoom = () => {
     socket.emit('join-room', { roomId: roomId, userName: name });
@@ -17,7 +18,12 @@ function MeeetingRoom() {
   useEffect(() => {
     // make sure to change the url during deployment
     socket = io("http://22bc-175-177-41-148.ngrok.io");
-    socket.on('connection', () => console.log("connected"))
+    socket.on('connection', () => console.log("connected"));
+    socket.on("all-users", users => {
+      console.log("Active Users");
+      console.log(users);
+      setActiveUsers(users);
+    });
     // console.log("hello again")
   }, []);
 
