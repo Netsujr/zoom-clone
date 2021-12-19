@@ -31,8 +31,8 @@ const items = [
 function MenuButtons({ navigation }) {
 
   const openMeeting = () => {
-    navigation.navigate("Room")
-  }
+    navigation.navigate("Room");
+  };
 
   return (
     <View style={styles.container}>
@@ -54,7 +54,7 @@ function MenuButtons({ navigation }) {
       )}
     </View>
   );
-}
+};
 
 export default MenuButtons;
 
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   }
-})
+});

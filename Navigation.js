@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./screens/Home";
-import MeeetingRoom from './screens/MeeetingRoom';
+import MeetingRoom from './screens/MeetingRoom';
 
 function Navigation() {
   const Stack = createStackNavigator();
@@ -18,7 +18,7 @@ function Navigation() {
           }} />
         <Stack.Screen
           name="Room"
-          component={MeeetingRoom}
+          component={MeetingRoom}
           options={{
             title: "Start a Meeting",
             headerStyle: {

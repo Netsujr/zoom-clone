@@ -12,7 +12,7 @@ function Home({ navigation }) {
       <SafeAreaView style={{ height: '100%' }}>
         <Header />
         <SearchBar />
-        <MenuButtons navigation={navigation}/>
+        <MenuButtons navigation={navigation} />
         <ContactsMenu />
       </SafeAreaView>
     </View>
@@ -25,6 +25,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1c1c1c",
     padding: 15,
-
   }
 });
