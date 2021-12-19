@@ -28,27 +28,33 @@ const items = [
   },
 ]
 
-const MenuButtons = () => {
+function MenuButtons({ navigation }) {
+
+  const openMeeting = () => {
+    navigation.navigate("Room")
+  }
+
   return (
     <View style={styles.container}>
-      {items.map((item, index) =>
-        <View
-          key={index}
-          style={styles.buttonContainer}>
-          <TouchableOpacity style={{
+      {items.map((item, index) => <View
+        key={index}
+        style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => openMeeting()}
+          style={{
             // ... unpacks the style of the button
             ...styles.button,
             // checks if items has a custom color, otherwise uses set color
             backgroundColor: item.customColor ? item.customColor : "#7e3f8f"
           }}>
-            <FontAwesome name={item.name} size={23} color={"#efefef"} />
-          </TouchableOpacity>
-          <Text style={styles.menuText}>{item.title}</Text>
-        </View>
+          <FontAwesome name={item.name} size={23} color={"#efefef"} />
+        </TouchableOpacity>
+        <Text style={styles.menuText}>{item.title}</Text>
+      </View>
       )}
     </View>
   );
-};
+}
 
 export default MenuButtons;
 

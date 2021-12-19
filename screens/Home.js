@@ -5,14 +5,14 @@ import SearchBar from '../components/SearchBar';
 import MenuButtons from '../components/MenuButtons';
 import ContactsMenu from '../components/ContactsMenu';
 
-const Home = () => {
+function Home({ navigation }) {
   return (
     <View style={styles.container}>
       {/* inline styling */}
-      <SafeAreaView style={{ height: '100%'}}>
+      <SafeAreaView style={{ height: '100%' }}>
         <Header />
         <SearchBar />
-        <MenuButtons />
+        <MenuButtons navigation={navigation}/>
         <ContactsMenu />
       </SafeAreaView>
     </View>
