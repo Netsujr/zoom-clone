@@ -4,7 +4,6 @@ import StartMeeting from '../components/StartMeeting';
 import { io } from "socket.io-client";
 import { Camera } from "expo-camera";
 
-
 let socket;
 
 function MeeetingRoom() {
@@ -17,6 +16,7 @@ function MeeetingRoom() {
   const __startCamera = async () => {
     // read up on async functions Javascript
     const { status } = await Camera.requestCameraPermissionsAsync();
+    // requestPermissions function outdated, new func /\
     if (status === "granted") {
       setStartCamera(true);
     } else {
@@ -44,7 +44,13 @@ function MeeetingRoom() {
   return (
     <View style={styles.container}>
     {startCamera ? (
-      <Text>Start Camera</Text>
+      <Camera
+          type={"front"}
+          style={{ width: "100%", height: 600 }}
+          >
+
+
+      </Camera>
       ) : (
         // {/* Start meeting button  */}
         // Start meeting section before camera is activated
