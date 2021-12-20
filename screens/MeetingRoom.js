@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity, Modal } from 'react-native';
 import StartMeeting from '../components/StartMeeting';
 import { io } from "socket.io-client";
 import { Camera } from "expo-camera";
@@ -38,8 +38,9 @@ let socket;
 function MeetingRoom() {
   const [name, setName] = useState();
   const [roomId, setRoomId] = useState();
-  const [activeUsers, setActiveUsers] = useState(["Ricky", "Joss", "Banana"]);
+  const [activeUsers, setActiveUsers] = useState([]);
   const [startCamera, setStartCamera] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const __startCamera = async () => {
     // read up on async functions Javascript
@@ -59,46 +60,68 @@ function MeetingRoom() {
 
   useEffect(() => {
     // make sure to change the url during deployment
-    socket = io("http://fe01-2407-c800-1303-0-6856-6b0-d76-7e9b.ngrok.io");
+    socket = io("http://7042-175-177-41-148.ngrok.io");
     socket.on('connection', () => console.log("connected"));
     socket.on("all-users", users => {
-      console.log("Active Users");
+      // console.log("Active Users");
       console.log(users);
+      // users = users.filter(user => (user.Username != name));
       setActiveUsers(users);
     });
-    // console.log("hello again")
-  }, [])
+    console.log("hello again");
+  }, []);
 
   return (
     <View style={styles.container}>
       {startCamera ? (
         <SafeAreaView style={{ flex: 1 }}>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            presentationStyle='={"fullScreen}'
+            visible={modalVisible}
+            onRequestClose={() => {
+              // Alert.alert("Modal has been clsoed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <Text>HeyHeyHey</Text>
+          </Modal>
+
+
+
+          {/* active users  */}
           <View style={styles.activeUsersContainer}>
             <View style={styles.cameraContainer}>
               <Camera
                 type={"front"}
                 style={{
-                  width: activeUsers.lenght == 0 ? "100%" : 150,
-                  height: activeUsers.lenght == 0 ? "100%" : 150
-                  // resizeMode: activeUsers.lenght == 0 ? null : "contain"
+                  width: activeUsers.lenght <= 1 ? "100%" : 150,
+                  height: activeUsers.lenght <= 1 ? "100%" : 150
                 }}>
+                  {/* resizeMode: activeUsers.lenght == 0 ? null : "contain" */}
               </Camera>
-              {activeUsers.map((user, index) =>
+              {activeUsers.filter(user => (user.Username != name)).map((user, index) =>
                 <View key={index} style={styles.activeUserContainer}>
                   <Text style={{ color: "white" }}>{user.userName}</Text>
                 </View>
-
               )}
             </View>
           </View>
           {/* // this is the "footer"  */}
           <View style={styles.menu}>
             {menuIcons.map((icon, index) =>
-              <TouchableOpacity style={styles.tile}>
+              <TouchableOpacity key={index} style={styles.tile}>
                 <FontAwesome name={icon.name} size={24} color={"rgba(0, 178, 202, 0.5)"} />
                 <Text style={styles.textTile}>{icon.title}</Text>
               </TouchableOpacity>
             )}
+            <TouchableOpacity
+            onPress={()=> setModalVisible(true)}
+            style={styles.tile}>
+              <FontAwesome name={"comment"} size={24} color={"rgba(0, 178, 202, 0.5)"} />
+              <Text style={styles.textTile}>Chat</Text>
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       ) : (
@@ -146,7 +169,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "black",
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    alignItems: "center",
+    // flex: 1
+  },
+
+  activeUsersContainer: {
+    flex: 1,
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: 'center',
+    width: "100%",
+    // height: "100%"
   },
 
   activeUserContainer: {
@@ -159,10 +193,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-
-  activeUsersContainer: {
-    flex: 1,
-    justifyContent: "center"
-  }
-
 });
