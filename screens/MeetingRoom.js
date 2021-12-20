@@ -61,7 +61,7 @@ function MeetingRoom() {
 
   useEffect(() => {
     // make sure to change the url during deployment
-    socket = io("http://7042-175-177-41-148.ngrok.io");
+    socket = io("http://3003-2407-c800-1303-0-65b7-ba3-6887-b8ac.ngrok.io");
     socket.on('connection', () => console.log("connected"));
     socket.on("all-users", users => {
       console.log(users);
