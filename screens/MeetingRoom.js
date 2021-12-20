@@ -3,8 +3,9 @@ import { View, Text, StyleSheet, Alert, SafeAreaView, TouchableOpacity, Modal } 
 import StartMeeting from '../components/StartMeeting';
 import { io } from "socket.io-client";
 import { Camera } from "expo-camera";
-// import { TouchableOpacity } from 'react-native-web';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Chat from '../components/Chat';
+// import { TouchableOpacity } from 'react-native-web';
 
 const menuIcons = [
   {
@@ -63,10 +64,10 @@ function MeetingRoom() {
     socket = io("http://7042-175-177-41-148.ngrok.io");
     socket.on('connection', () => console.log("connected"));
     socket.on("all-users", users => {
-      // console.log("Active Users");
       console.log(users);
-      // users = users.filter(user => (user.Username != name));
       setActiveUsers(users);
+      // console.log("Active Users");
+      // users = users.filter(user => (user.Username != name));
     });
     console.log("hello again");
   }, []);
@@ -83,8 +84,12 @@ function MeetingRoom() {
             onRequestClose={() => {
               // Alert.alert("Modal has been clsoed.");
               setModalVisible(!modalVisible);
-            }}
-          >
+            }}>
+
+            <Chat
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+            />
             <Text>HeyHeyHey</Text>
           </Modal>
 
@@ -99,7 +104,7 @@ function MeetingRoom() {
                   width: activeUsers.lenght <= 1 ? "100%" : 150,
                   height: activeUsers.lenght <= 1 ? "100%" : 150
                 }}>
-                  {/* resizeMode: activeUsers.lenght == 0 ? null : "contain" */}
+                {/* resizeMode: activeUsers.lenght == 0 ? null : "contain" */}
               </Camera>
               {activeUsers.filter(user => (user.Username != name)).map((user, index) =>
                 <View key={index} style={styles.activeUserContainer}>
@@ -117,8 +122,8 @@ function MeetingRoom() {
               </TouchableOpacity>
             )}
             <TouchableOpacity
-            onPress={()=> setModalVisible(true)}
-            style={styles.tile}>
+              onPress={() => setModalVisible(true)}
+              style={styles.tile}>
               <FontAwesome name={"comment"} size={24} color={"rgba(0, 178, 202, 0.5)"} />
               <Text style={styles.textTile}>Chat</Text>
             </TouchableOpacity>
