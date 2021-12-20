@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, View, Text, StyleSheet, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
+import { KeyboardAvoidingView, View, Text, StyleSheet, TextInput, SafeAreaView, TouchableOpacity, Platform, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import ChatHeader from './ChatHeader';
+// import { TouchableWithoutFeedback } from 'react-native-web';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Chat({ setModalVisible }) {
@@ -11,33 +12,42 @@ function Chat({ setModalVisible }) {
   return (
     <View style={styles.container}>
       <SafeAreaView style={{ height: "100%" }}>
-        <ChatHeader setModalVisible={setModalVisible} />
-        {/* message  */}
-        <View style={styles.chatMessages}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={{ flex: 1 }}>
+              <ChatHeader setModalVisible={setModalVisible} />
+              {/* message  */}
+              <View style={styles.chatMessages}>
 
-        </View>
+              </View>
 
-        {/* typing the message  */}
-        <View style={styles.chatFormContainer}>
-          <Text style={{ color: "white" }}>Send to: Everyone</Text>
-          <View style={styles.chatForm}>
-            <TextInput
-              style={styles.textInput}
-              placeholder='Tap to Chat'
-              placeholderTextColor="#595859"
-              value={messageText}
-              onChangeText={text => setMessageText(text)}
-            // setMessageText={setMessageText}
-            />
-            <TouchableOpacity
-              style={{
-                ...styles.button,
-                backgroundColor: messageText ? "#0B71EB" : "#373838",
-              }}>
-              <FontAwesome name={"send"} size={18} color="#efefef" />
-            </TouchableOpacity>
-          </View>
-        </View>
+              {/* typing the message  */}
+              <View style={styles.chatFormContainer}>
+                <Text style={{ color: "white" }}>Send to: Everyone</Text>
+                <View style={styles.chatForm}>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder='Tap to Chat'
+                    placeholderTextColor="#595859"
+                    value={messageText}
+                    onChangeText={text => setMessageText(text)}
+                  // setMessageText={setMessageText}
+                  />
+                  <TouchableOpacity
+                    style={{
+                      ...styles.button,
+                      backgroundColor: messageText ? "#0B71EB" : "#373838",
+                    }}>
+                    <FontAwesome name={"send"} size={18} color="#efefef" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </View>
   );

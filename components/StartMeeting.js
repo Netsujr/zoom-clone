@@ -19,7 +19,7 @@ function StartMeeting({ name, roomId, setName, setRoomId, joinRoom }) {
           <TextInput
             style={styles.textInput}
             value={roomId}
-            placeholder='Enter Room ID'
+            placeholder='Enter Any Room ID'
             placeholderTextColor='rgba(110, 190, 201, 0.3)'
             onChangeText={text => setRoomId(text)}
           />

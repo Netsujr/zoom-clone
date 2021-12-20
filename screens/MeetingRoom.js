@@ -62,10 +62,10 @@ function MeetingRoom() {
   useEffect(() => {
     // make sure to change the url during deployment
     socket = io("http://3003-2407-c800-1303-0-65b7-ba3-6887-b8ac.ngrok.io");
-    socket.on('connection', () => console.log("connected"));
+    socket.on('connection', () => console.log("connected"))
     socket.on("all-users", users => {
-      console.log(users);
-      setActiveUsers(users);
+      console.log(users)
+      setActiveUsers(users)
       // console.log("Active Users");
       // users = users.filter(user => (user.Username != name));
     });
@@ -92,16 +92,15 @@ function MeetingRoom() {
             />
           </Modal>
 
-
-
           {/* active users  */}
           <View style={styles.activeUsersContainer}>
             <View style={styles.cameraContainer}>
               <Camera
                 type={"front"}
                 style={{
-                  width: activeUsers.lenght <= 1 ? "100%" : 150,
-                  height: activeUsers.lenght <= 1 ? "100%" : 150
+                  // width: "100%", height: "50%"
+                  width: "100%",
+                  height: activeUsers.lenght <= 1 ? "100%" : "50%"
                 }}>
                 {/* resizeMode: activeUsers.lenght == 0 ? null : "contain" */}
               </Camera>
@@ -112,7 +111,7 @@ function MeetingRoom() {
               )}
             </View>
           </View>
-          {/* // this is the "footer"  */}
+          {/* // this is the Footer  */}
           <View style={styles.menu}>
             {menuIcons.map((icon, index) =>
               <TouchableOpacity key={index} style={styles.tile}>
@@ -171,11 +170,10 @@ const styles = StyleSheet.create({
 
   cameraContainer: {
     justifyContent: "center",
-    backgroundColor: "black",
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    // flex: 1
+    flex: 1
   },
 
   activeUsersContainer: {
@@ -188,12 +186,11 @@ const styles = StyleSheet.create({
   },
 
   activeUserContainer: {
-    borderColor: "gray",
-    borderWidth: 1,
+    // borderColor: "gray",
+    // borderWidth: 1,
     // flex: 1,
-    width: 150,
-    height: 150,
-    // resizeMode: "contain",
+    width: "100%",
+    height: "50%",
     justifyContent: "center",
     alignItems: "center"
   },
