@@ -39,7 +39,7 @@ let socket;
 function MeetingRoom() {
   const [name, setName] = useState();
   const [roomId, setRoomId] = useState();
-  const [activeUsers, setActiveUsers] = useState([]);
+  const [activeUsers, setActiveUsers] = useState(["User 2"]);
   const [startCamera, setStartCamera] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -61,11 +61,11 @@ function MeetingRoom() {
 
   useEffect(() => {
     // make sure to change the url during deployment
-    socket = io("http://3003-2407-c800-1303-0-65b7-ba3-6887-b8ac.ngrok.io");
-    socket.on('connection', () => console.log("connected"))
+    socket = io("http://2cba-2407-c800-1303-0-65b7-ba3-6887-b8ac.ngrok.io");
+    socket.on('connection', () => console.log("connected"));
     socket.on("all-users", users => {
-      console.log(users)
-      setActiveUsers(users)
+      console.log(users);
+      setActiveUsers(users);
       // console.log("Active Users");
       // users = users.filter(user => (user.Username != name));
     });
@@ -98,7 +98,7 @@ function MeetingRoom() {
               <Camera
                 type={"front"}
                 style={{
-                  // width: "100%", height: "50%"
+                  // width: "100%", height: "100%"
                   width: "100%",
                   height: activeUsers.lenght <= 1 ? "100%" : "50%"
                 }}>
