@@ -60,24 +60,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#1c1c1c",
-
   },
 
   chatMessages: {
     flex: 1,
-
   },
 
   chatFormContainer: {
     borderColor: "#2f2f2f",
     borderTopWidth: 1,
     padding: 12
-
   },
 
   chatForm: {
     flexDirection: "row",
-
   },
 
   textInput: {
@@ -100,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-
   },
-
 });
+
+// Chat layout works, havent implemented sending function just yet
