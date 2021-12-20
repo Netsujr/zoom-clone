@@ -90,7 +90,6 @@ function MeetingRoom() {
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
             />
-            <Text>HeyHeyHey</Text>
           </Modal>
 
 

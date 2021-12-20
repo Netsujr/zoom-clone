@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, SafeAreaView } from 'react-native';
+import { KeyboardAvoidingView, View, Text, StyleSheet, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import ChatHeader from './ChatHeader';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Chat({ setModalVisible }) {
 
@@ -22,10 +24,18 @@ function Chat({ setModalVisible }) {
             <TextInput
               style={styles.textInput}
               placeholder='Tap to Chat'
+              placeholderTextColor="#595859"
               value={messageText}
-              setMessageText={setMessageText}
+              onChangeText={text => setMessageText(text)}
+            // setMessageText={setMessageText}
             />
-
+            <TouchableOpacity
+              style={{
+                ...styles.button,
+                backgroundColor: messageText ? "#0B71EB" : "#373838",
+              }}>
+              <FontAwesome name={"send"} size={18} color="#efefef" />
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
@@ -44,22 +54,43 @@ const styles = StyleSheet.create({
   },
 
   chatMessages: {
+    flex: 1,
 
   },
 
   chatFormContainer: {
-
+    borderColor: "#2f2f2f",
+    borderTopWidth: 1,
+    padding: 12
 
   },
 
   chatForm: {
-
+    flexDirection: "row",
 
   },
 
   textInput: {
+    height: 40,
+    color: "#efefef",
+    borderColor: "#595859",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 12,
+    flex: 1,
+  },
 
-  }
+  button: {
+    height: 40,
+    width: 40,
+    marginTop: 12,
+    marginLeft: 12,
+    // backgroundColor: "#373838",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
 
+  },
 
 });
